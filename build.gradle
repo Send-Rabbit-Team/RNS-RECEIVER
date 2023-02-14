@@ -1,0 +1,72 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.4'
+	id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.srt'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+
+	all {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// jpa
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// spring boot
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// mysql
+	runtimeOnly 'mysql:mysql-connector-java'
+
+	// test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// validation
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// log4j2
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
+
+	// json
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+
+	// redis
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '2.4.10'
+
+	// JASYPT
+	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3'
+
+	// random
+	implementation 'org.apache.commons:commons-text:1.10.0'
+
+	// rabbitmq
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	testImplementation 'org.springframework.amqp:spring-rabbit-test'
+
+	// 역 직렬화 문제 해결 패키지
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+	implementation 'com.fasterxml.jackson.core:jackson-databind'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
